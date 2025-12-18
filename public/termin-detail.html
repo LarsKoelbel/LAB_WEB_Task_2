@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termin-Details - Terminverwaltung</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="/javascript/script.js" async></script>
+    <script src="/javascript/termin-detail-template.js" async></script>
+    <script src="/javascript/termin-detail-fill.js" async></script>
 </head>
 <body>
     <!-- 
@@ -108,7 +111,7 @@
                         E-Mail-Adresse <span class="required">*</span>
                     </label>
                     <input 
-                        type="email" 
+                        type="text"
                         id="email" 
                         name="email" 
                         class="form-input" 
@@ -133,15 +136,18 @@
                 <p id="unavailable-reason">Der Termin ist ausgebucht oder die Anmeldefrist ist abgelaufen.</p>
             </div>
         </section>
+
+        <!-- Meldung, wenn Anmeldung erfolgreich -->
+        <section class="termin-unavailable" id="termin-signon-complete" style="display: none;">
+            <div class="message message-success">
+                <p>Sie haben sich erfolgreich für diesen Termin angemeldet.</p>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
         <p>&copy; 2025 Terminverwaltung. Alle Rechte vorbehalten.</p>
     </footer>
-
-    <script src="script.js"></script>
-    <script src="termin-detail-template.js"></script>
-    <script src="termin-detail.js"></script>
 </body>
 </html>
 

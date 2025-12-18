@@ -92,6 +92,27 @@ async function signOn(appointmentID, email, first_name, last_name) {
     }
 }
 
+async function changeVis(appointmentID, vis, user) {
+    try {
+        // Find the appointment by its ID
+        const appointment = await AppointmentModel.findOne({ id: appointmentID }).exec();
+
+        if (!appointment) {
+            throw new Error(`Appointment with ID ${appointmentID} not found`);
+        }
+
+        if (appointment.owner === user) appointment.visibility = vis;
+        else throw new Error(`Appointment with ID ${appointmentID} not found`);
+
+        // Save the updated appointment
+        return await appointment.save();
+
+    } catch (error) {
+        console.error(error);
+        throw new Error(`Failed to sign on: ${error.message}`);
+    }
+}
+
 async function getAttending(appointmentID, username){
     try {
     // Find the appointment by its ID
@@ -109,4 +130,4 @@ async function getAttending(appointmentID, username){
 }
 }
 
-export {getAppointments, createAppointment, getPublicAppointments, getPublicAndOwnAppointments, signOn, getAttending}
+export {getAppointments, createAppointment, getPublicAppointments, getPublicAndOwnAppointments, signOn, getAttending, changeVis}

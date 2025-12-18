@@ -8,6 +8,13 @@ const appointmentSchema = new mongoose.Schema({
         maxLength: 500,
         match: new RegExp("^[a-zA-Z0-9äöüÄÖÜß .,!?;:'\"()\\-–—…/&%$€@]+$")
     },
+    description: {
+        type: String,
+        required: true,
+        minLength: 1,
+        maxLength: 100000,
+        match: new RegExp("^[a-zA-Z0-9äöüÄÖÜß .,!?;:'\"()\\-–—…/&%$€@]+$")
+    },
     date: {
         type: String,
         required: true,

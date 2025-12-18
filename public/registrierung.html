@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrierung - Terminverwaltung</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="/javascript/script.js" async></script>
+    <script src="/javascript/registrierung.js" async></script>
 </head>
 <body>
     <!-- 
@@ -23,7 +25,7 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="index.html" class="nav-link">Startseite</a></li>
-                    <li><a href="login.html" class="nav-link">Anbieter:innen-Login</a></li>
+                    <li><a href="login.html" class="nav-link">Login | Registrieren</a></li>
                 </ul>
             </div>
         </nav>
@@ -42,7 +44,7 @@
                             E-Mail-Adresse <span class="required">*</span>
                         </label>
                         <input 
-                            type="email" 
+                            type="text"
                             id="reg-email" 
                             name="email" 
                             class="form-input" 
@@ -64,7 +66,6 @@
                             required
                             placeholder="Mindestens 8 Zeichen"
                             autocomplete="new-password"
-                            minlength="8"
                         >
                         <small class="form-hint">Mindestens 8 Zeichen</small>
                     </div>
@@ -83,6 +84,8 @@
                             autocomplete="new-password"
                         >
                     </div>
+
+                    <p id="response">Response here</p>
 
                     <div class="form-actions">
                         <!-- Registrierungs-Button – erstellt neues Anbieter:innen-Konto im Backend -->
@@ -103,8 +106,7 @@
         <p>&copy; 2025 Terminverwaltung. Alle Rechte vorbehalten.</p>
     </footer>
 
-    <script src="script.js"></script>
-    <script src="registrierung.js"></script>
+
 </body>
 </html>
 

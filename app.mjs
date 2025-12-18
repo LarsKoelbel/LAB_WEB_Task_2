@@ -62,6 +62,11 @@ app.use(cookieParser());
 
 app.use('/staff', ensureAuthenticatedStatic, express.static(path.join(_dirname, 'staff')));
 app.use(express.static(path.join(_dirname, 'public')));
+// Route for viewing details
+app.get('/view', (req, res) => {
+    res.sendFile(path.join(_dirname, 'public', 'termin-detail.html'));
+});
+
 
 const options = {
     definition: {

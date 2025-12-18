@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anmeldeliste - Terminverwaltung</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="/javascript/script.js" async></script>
+    <script src="/javascript/anmeldeliste.js" async></script>
 </head>
 <body>
     <!-- 
@@ -23,9 +25,7 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="index.html" class="nav-link">Startseite</a></li>
-                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
                     <li><a href="termin-erstellen.html" class="nav-link">Termin erstellen</a></li>
-                    <li><a href="login.html" class="nav-link">Abmelden</a></li>
                 </ul>
             </div>
         </nav>
@@ -34,7 +34,7 @@
     <main class="main">
         <div class="back-link-container">
             <!-- Link zurück zum Dashboard -->
-            <a href="dashboard.html" class="back-link">← Zurück zum Dashboard</a>
+            <a href="/" class="back-link">← Zurück zum Dashboard</a>
         </div>
 
         <section class="anmeldeliste-section">
@@ -53,7 +53,6 @@
                             <th>Vorname</th>
                             <th>Nachname</th>
                             <th>E-Mail-Adresse</th>
-                            <th>Anmeldedatum</th>
                         </tr>
                     </thead>
                     <tbody id="anmeldeliste-tbody">
@@ -74,9 +73,6 @@
     <footer class="footer">
         <p>&copy; 2025 Terminverwaltung. Alle Rechte vorbehalten.</p>
     </footer>
-
-    <script src="script.js"></script>
-    <script src="anmeldeliste.js"></script>
 </body>
 </html>
 

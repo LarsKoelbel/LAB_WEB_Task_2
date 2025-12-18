@@ -23,6 +23,7 @@
     --color-light-gray: #F5F5F5;
     --color-gray: #E5E5E5;
     --color-dark-gray: #4A4A4A;
+    --color-warn-red: #d50000;
     --color-text: #2D2D2D;
     
     /* Spacing */
@@ -205,7 +206,7 @@ body {
 }
 
 .termin-badge-full {
-    background-color: var(--color-dark-gray);
+    background-color: var(--color-warn-red);
 }
 
 .termin-card-body {
@@ -630,6 +631,14 @@ textarea.error:focus {
     margin-bottom: var(--spacing-xl);
 }
 
+.termin-signon-complete {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
 /* ===== Authentifizierungs-Seiten (Login/Registrierung) ===== */
 .auth-section {
     display: flex;
@@ -872,3 +881,10 @@ textarea.error:focus {
     }
 }
 
+.controls{
+    display: none;
+}
+
+.update-button {
+    display: none;
+}

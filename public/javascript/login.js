@@ -6,27 +6,46 @@
 */
 
 /**
- * Behandelt das Absenden des Login-Formulars
- * @param {Event} event - Das Submit-Event
- */
-function handleLoginSubmit(event) {
-    event.preventDefault();
-    
-    // Weiterleitung zum Dashboard
-    // Später wird hier die echte Authentifizierung stattfinden
-    window.location.href = 'dashboard.html';
-}
-
-/**
  * Initialisiert die Login-Seite
  */
 function initLogin() {
-    const loginForm = document.getElementById('login-form');
-    if (loginForm) {
-        loginForm.addEventListener('submit', handleLoginSubmit);
+    document.getElementById('login-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        logIn();
+    });
+}
+
+/**
+ * Log the user into te system
+ */
+async function logIn()
+{
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    const response = document.getElementById('response');
+
+    try {
+        const result = await fetch("/api/auth/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, password: password }),
+        })
+        if (!result.ok) {
+            console.log(result);
+            response.textContent = (await result.json()).message;
+        }
+        else {
+            // Return to homepage in successful login
+            window.location.href = "/";
+        }
+    }catch(err) {
+        response.textContent = err.message;
     }
+
 }
 
 // Initialisiere Seite beim Laden
-document.addEventListener('DOMContentLoaded', initLogin);
+window.addEventListener('load', initLogin);
 

@@ -8,6 +8,7 @@ const appointmentAjvSchema = {
     additionalProperties: false,
     required: [
         "title",
+        "description",
         "date",
         "time",
         "location",
@@ -20,6 +21,12 @@ const appointmentAjvSchema = {
             type: "string",
             minLength: 1,
             maxLength: 500,
+            pattern: "^[a-zA-Z0-9äöüÄÖÜß .,!?;:'\"()\\-–—…/&%$€@]+$"
+        },
+        description: {
+            type: "string",
+            minLength: 1,
+            maxLength: 10000,
             pattern: "^[a-zA-Z0-9äöüÄÖÜß .,!?;:'\"()\\-–—…/&%$€@]+$"
         },
         date: {
@@ -105,6 +112,39 @@ const getAttendeesAjvSchema = {
     }
 };
 
+const getAppointmentAjvSchema = {
+    type: "object",
+    additionalProperties: false,
+    required: ["appointmentID"],
+    properties: {
+        appointmentID: {
+            type: "string",
+            minLength: 25,
+            maxLength: 25,
+            pattern: "^[A-Za-z]{25}$",
+            description: "The unique ID of the appointment to fetch"
+        }
+    }
+};
 
+const changeVisibilityAjvSchema = {
+    type: "object",
+    additionalProperties: false,
+    required: ["appointmentID", "visibility"],
+    properties: {
+        appointmentID: {
+            type: "string",
+            minLength: 25,
+            maxLength: 25,
+            pattern: "^[A-Za-z]{25}$",
+            description: "The unique ID of the appointment"
+        },
+        visibility: {
+            type: "string",
+            enum: ["private", "unlisted", "public"],
+            description: "New visibility level for the appointment"
+        }
+    }
+};
 
-export {appointmentAjvSchema, signOnAjvSchema, getAttendeesAjvSchema};
+export {appointmentAjvSchema, signOnAjvSchema, getAttendeesAjvSchema, getAppointmentAjvSchema, changeVisibilityAjvSchema};

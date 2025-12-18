@@ -6,27 +6,49 @@
 */
 
 /**
- * Behandelt das Absenden des Registrierungs-Formulars
- * @param {Event} event - Das Submit-Event
- */
-function handleRegistrierungSubmit(event) {
-    event.preventDefault();
-    
-    // Weiterleitung zum Login
-    // Später wird hier die echte Registrierung stattfinden
-    window.location.href = 'login.html';
-}
-
-/**
  * Initialisiert die Registrierungs-Seite
  */
 function initRegistrierung() {
-    const registrierungForm = document.getElementById('registrierung-form');
-    if (registrierungForm) {
-        registrierungForm.addEventListener('submit', handleRegistrierungSubmit);
+    document.getElementById('registrierung-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        register();
+    });
+}
+
+/**
+ * Register a user
+ */
+async function register()
+{
+    const email = document.getElementById('reg-email').value;
+    const password = document.getElementById('reg-password').value;
+    const password_confirm = document.getElementById('reg-password-confirm').value;
+    const response = document.getElementById('response');
+
+    if (password !== password_confirm) {response.textContent = "Passwords do not match"; return;}
+
+    try {
+        const result = await fetch("/api/auth/register", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, password: password }),
+        })
+        if (!result.ok) {
+            console.log(result);
+            response.textContent = (await result.json()).message;
+        }
+        else {
+            // Return to login page in successful login
+            window.location.href = "/login.html";
+        }
+    }catch(err) {
+        response.textContent = err.message;
     }
+
 }
 
 // Initialisiere Seite beim Laden
-document.addEventListener('DOMContentLoaded', initRegistrierung);
+window.addEventListener('load', initRegistrierung);
 

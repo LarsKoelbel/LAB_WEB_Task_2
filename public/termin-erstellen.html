@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termin erstellen - Terminverwaltung</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="/javascript/create.js" async></script>
 </head>
 <body>
     <!-- 
@@ -23,9 +24,7 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="index.html" class="nav-link">Startseite</a></li>
-                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
                     <li><a href="termin-erstellen.html" class="nav-link active">Termin erstellen</a></li>
-                    <li><a href="login.html" class="nav-link">Abmelden</a></li>
                 </ul>
             </div>
         </nav>
@@ -34,7 +33,7 @@
     <main class="main">
         <div class="back-link-container">
             <!-- Link zurück zum Dashboard -->
-            <a href="dashboard.html" class="back-link">← Zurück zum Dashboard</a>
+            <a href="/" class="back-link">← Zurück zum Dashboard</a>
         </div>
 
         <section class="termin-erstellen-section">
@@ -86,27 +85,15 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="termin-uhrzeit-von" class="form-label">
-                            Uhrzeit von <span class="required">*</span>
+                        <label for="termin-uhrzeit" class="form-label">
+                            Uhrzeit/ Dauer <span class="required">*</span>
                         </label>
                         <input 
-                            type="time" 
-                            id="termin-uhrzeit-von" 
+                            type="text"
+                            id="termin-uhrzeit"
                             name="uhrzeitVon" 
-                            class="form-input" 
-                            required
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="termin-uhrzeit-bis" class="form-label">
-                            Uhrzeit bis <span class="required">*</span>
-                        </label>
-                        <input 
-                            type="time" 
-                            id="termin-uhrzeit-bis" 
-                            name="uhrzeitBis" 
-                            class="form-input" 
+                            class="form-input"
+                            placeholder="z.B. 14:00 - 18:00"
                             required
                         >
                     </div>
@@ -138,12 +125,12 @@
                             class="form-input" 
                             required
                         >
-                        <small class="form-hint">Bis zu diesem Datum können sich Interessent:innen anmelden</small>
+                        <small class="form-hint">Bis zu diesem Datum können sich Interessierte anmelden</small>
                     </div>
 
                     <div class="form-group">
                         <label for="termin-max-teilnehmer" class="form-label">
-                            Maximale Teilnehmer:innen
+                            Maximale Anzahl Teilnehmender <span class="required">*</span>
                         </label>
                         <input 
                             type="number" 
@@ -151,15 +138,27 @@
                             name="maxTeilnehmer" 
                             class="form-input" 
                             min="1"
-                            placeholder="Optional"
+                            placeholder="z.B. 50"
                         >
-                        <small class="form-hint">Leer lassen für unbegrenzte Teilnehmer:innen</small>
                     </div>
+
+                    <div class="form-group">
+                        <label for="termin-visibility" class="form-label">
+                            Sichtbarkeit
+                        </label>
+                        <select id="termin-visibility" name="visibility" class="form-input" required>
+                            <option value="private">Privat</option>
+                            <option value="unlisted">Nicht gelistet</option>
+                            <option value="public">Öffentlich</option>
+                        </select>
+                        <small class="form-hint">Privat: Nur sie können den Termin sehen. <br>Nicht gelistet: Nur Nutzer mit einem Link können den Termin sehen.<br>Öffentlich: Der Termin erscheint auf der frei zugänglichen Homepage</small>
+                    </div>
+
                 </div>
 
                 <div class="form-actions">
                     <!-- Button zum Abbrechen - navigiert zurück zum Dashboard -->
-                    <a href="dashboard.html" class="btn btn-secondary">Abbrechen</a>
+                    <a href="/" class="btn btn-secondary">Abbrechen</a>
                     <!-- Button zum Erstellen des Termins – speichert Termin in der Datenbank -->
                     <button type="submit" class="btn btn-primary" id="termin-erstellen-submit">
                         Termin erstellen

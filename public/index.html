@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terminverwaltung - Startseite</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="/javascript/script.js" async></script>
+    <script src="/javascript/index.js" async></script>
 </head>
 <body>
     <!-- 
@@ -22,7 +24,9 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="index.html" class="nav-link active">Startseite</a></li>
-                    <li><a href="login.html" class="nav-link">Anbieter:innen-Login</a></li>
+                    <li><a href="login.html" class="nav-link">Login | Registrieren</a></li>
+                    <li id="button-create"><a href="termin-erstellen.html" class="nav-link">Termin erstellen</a></li>
+                    <li id="button-logout"><a href="login.html" class="nav-link">Abmelden</a></li>
                 </ul>
             </div>
         </nav>
@@ -30,113 +34,21 @@
 
     <main class="main">
         <section class="hero">
+            <h2 class="hero-title">Ich habe eine Einladung</h2>
+            <p class="hero-subtitle">Falls sie zu einem Termin eingeladen wurden, können sie die Termin-ID hier eingeben</p>
+            <input type="text" placeholder="Termin ID" id="termin-id">
+            <a class="btn btn-primary" id="search-button">Suchen</a>
+        </section>
+        <hr>
+        <section class="hero">
             <h2 class="hero-title">Verfügbare Termine</h2>
             <p class="hero-subtitle">Finden Sie den passenden Termin für sich</p>
         </section>
 
-        <section class="termin-list">
+        <section class="termin-list" id="termin-list">
             <!-- Mock-Daten: Statische Beispiel-Termine -->
-            <article class="termin-card" data-termin-id="1">
-                <div class="termin-card-header">
-                    <h3 class="termin-title">Workshop: Webentwicklung Grundlagen</h3>
-                    <span class="termin-badge">Verfügbar</span>
-                </div>
-                <div class="termin-card-body">
-                    <p class="termin-description">
-                        Einführung in moderne Webentwicklung mit HTML, CSS und JavaScript.
-                    </p>
-                    <div class="termin-info">
-                        <div class="info-item">
-                            <span class="info-label">Datum:</span>
-                            <span class="info-value">20.12.2025</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Uhrzeit:</span>
-                            <span class="info-value">10:00 - 14:00 Uhr</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Ort:</span>
-                            <span class="info-value">Hörsaal A, Gebäude 1</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Anmeldefrist:</span>
-                            <span class="info-value">19.12.2025</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="termin-card-footer">
-                    <!-- Button zur Termin-Detailseite - lädt später die Detailansicht mit Anmeldeformular -->
-                    <a href="termin-detail.html?id=1" class="btn btn-primary">Details anzeigen</a>
-                </div>
-            </article>
 
-            <article class="termin-card" data-termin-id="2">
-                <div class="termin-card-header">
-                    <h3 class="termin-title">Seminar: Projektmanagement</h3>
-                    <span class="termin-badge">Verfügbar</span>
-                </div>
-                <div class="termin-card-body">
-                    <p class="termin-description">
-                        Praktische Methoden und Tools für erfolgreiches Projektmanagement.
-                    </p>
-                    <div class="termin-info">
-                        <div class="info-item">
-                            <span class="info-label">Datum:</span>
-                            <span class="info-value">28.12.2025</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Uhrzeit:</span>
-                            <span class="info-value">09:00 - 17:00 Uhr</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Ort:</span>
-                            <span class="info-value">Seminarraum B, Gebäude 2</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Anmeldefrist:</span>
-                            <span class="info-value">25.12.2025</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="termin-card-footer">
-                    <!-- Button zur Termin-Detailseite - lädt später die Detailansicht mit Anmeldeformular -->
-                    <a href="termin-detail.html?id=2" class="btn btn-primary">Details anzeigen</a>
-                </div>
-            </article>
 
-            <article class="termin-card" data-termin-id="3">
-                <div class="termin-card-header">
-                    <h3 class="termin-title">Vortrag: Künstliche Intelligenz</h3>
-                    <span class="termin-badge termin-badge-full">Ausgebucht</span>
-                </div>
-                <div class="termin-card-body">
-                    <p class="termin-description">
-                        Aktuelle Entwicklungen und Anwendungen von KI in verschiedenen Bereichen.
-                    </p>
-                    <div class="termin-info">
-                        <div class="info-item">
-                            <span class="info-label">Datum:</span>
-                            <span class="info-value">10.01.2026</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Uhrzeit:</span>
-                            <span class="info-value">14:00 - 16:00 Uhr</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Ort:</span>
-                            <span class="info-value">Hörsaal C, Gebäude 1</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Anmeldefrist:</span>
-                            <span class="info-value">05.01.2026</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="termin-card-footer">
-                    <!-- Button zur Termin-Detailseite - lädt später die Detailansicht (ohne Anmeldeformular, da ausgebucht) -->
-                    <a href="termin-detail.html?id=3" class="btn btn-secondary">Details anzeigen</a>
-                </div>
-            </article>
         </section>
     </main>
 
@@ -144,7 +56,58 @@
         <p>&copy; 2025 Terminverwaltung. Alle Rechte vorbehalten.</p>
     </footer>
 
-    <script src="script.js"></script>
+
+<template id="appointment-template">
+    <article class="termin-card">
+        <div class="termin-card-header">
+            <h3 class="termin-title">Workshop: Webentwicklung Grundlagen</h3>
+            <span class="termin-badge">Verfügbar</span>
+        </div>
+        <div class="termin-card-body">
+            <p class="termin-description">
+                Einführung in moderne Webentwicklung mit HTML, CSS und JavaScript.
+            </p>
+            <div class="termin-info">
+                <div class="info-item">
+                    <span class="info-label">Datum:</span>
+                    <span class="info-value, date">20.12.2025</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Uhrzeit:</span>
+                    <span class="info-value, time">10:00 - 14:00 Uhr</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Ort:</span>
+                    <span class="info-value, location">Hörsaal A, Gebäude 1</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Anmeldefrist:</span>
+                    <span class="info-value, deadline">19.12.2025</span>
+                </div>
+            </div>
+        </div>
+        <div class="termin-card-footer">
+            <!-- Button zur Termin-Detailseite - lädt später die Detailansicht mit Anmeldeformular -->
+            <a class="btn btn-primary detail-button">Details & Anmeldung</a>
+            <div class="controls">
+            <a class="btn btn-secondary list-button">Teilnehmerliste Anzeigen</a>
+            <div class="form-group">
+                <label class="form-label">
+                    Sichtbarkeit
+                </label>
+                <select name="visibility" class="form-input termin-visibility" required>
+                    <option value="private">Privat</option>
+                    <option value="unlisted">Nicht gelistet</option>
+                    <option value="public">Öffentlich</option>
+                </select>
+                <small class="form-hint">Privat: Nur sie können den Termin sehen. <br>Nicht gelistet: Nur Nutzer mit einem Link können den Termin sehen.<br>Öffentlich: Der Termin erscheint auf der frei zugänglichen Homepage</small>
+            </div>
+                <a class="btn btn-secondary update-button">Aktuallisieren</a>
+            </div>
+        </div>
+    </article>
+</template>
+
 </body>
 </html>
 
