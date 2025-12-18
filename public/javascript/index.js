@@ -136,7 +136,11 @@ async function getUsername()
 async function logout()
 {
     await fetch("/api/auth/logout", {
-        method: "POST"
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({nothing: "here"})
     });
 
     // Reload main page
