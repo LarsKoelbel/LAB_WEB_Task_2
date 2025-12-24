@@ -1,10 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Not found</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seite nicht gefunden - Terminverwaltung</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="/javascript/script.js" defer></script>
 </head>
 <body>
-Not found
+    <!-- 
+        Zweck: 404-Fehlerseite
+        Nutzergruppe: Alle
+        Funktion: Zeigt Fehlermeldung, wenn Seite nicht gefunden wurde
+    -->
+    
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <img src="images/Fuchs_Logo_Börse.png" alt="Logo" class="logo-img">
+                    <span class="logo-text">Terminverwaltung</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Startseite</a></li>
+                    <li id="button-login"><a href="login.html" class="nav-link">Login | Registrieren</a></li>
+                    <li id="button-dashboard" style="display: none;"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li id="button-create" style="display: none;"><a href="termin-erstellen.html" class="nav-link">Termin erstellen</a></li>
+                    <li id="button-logout" style="display: none;"><a href="#" class="nav-link">Abmelden</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== Main Content ===== -->
+    <main class="main">
+        <!-- Error-Section: 404-Fehlerseite -->
+        <section class="error-section">
+            <div class="error-container">
+                <!-- Fehler-Titel -->
+                <h1 class="error-title">404 - Seite nicht gefunden</h1>
+                <!-- Fehler-Meldung -->
+                <p class="error-message">
+                    Die angeforderte Seite konnte nicht gefunden werden. 
+                    Möglicherweise wurde die Seite verschoben oder existiert nicht mehr.
+                </p>
+                <!-- Error-Actions: Navigation-Buttons -->
+                <div class="error-actions">
+                    <a href="index.html" class="btn btn-primary">Zur Startseite</a>
+                    <a href="javascript:history.back()" class="btn btn-secondary">Zurück</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Terminverwaltung. Alle Rechte vorbehalten.</p>
+    </footer>
 </body>
 </html>

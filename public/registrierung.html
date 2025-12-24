@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrierung - Terminverwaltung</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="/javascript/script.js" async></script>
-    <script src="/javascript/registrierung.js" async></script>
+    <script src="/javascript/script.js" defer></script>
+    <script src="/javascript/registrierung.js" defer></script>
 </head>
 <body>
     <!-- 
@@ -25,20 +25,27 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="index.html" class="nav-link">Startseite</a></li>
-                    <li><a href="login.html" class="nav-link">Login | Registrieren</a></li>
+                    <li id="button-login"><a href="login.html" class="nav-link">Login | Registrieren</a></li>
+                    <li id="button-dashboard" style="display: none;"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li id="button-create" style="display: none;"><a href="termin-erstellen.html" class="nav-link">Termin erstellen</a></li>
+                    <li id="button-logout" style="display: none;"><a href="#" class="nav-link">Abmelden</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
+    <!-- ===== Main Content ===== -->
     <main class="main">
+        <!-- Authentifizierungs-Section: Zentriert das Registrierungs-Formular -->
         <section class="auth-section">
             <div class="auth-container">
+                <!-- Titel und Untertitel -->
                 <h2 class="auth-title">Registrierung</h2>
                 <p class="auth-subtitle">Erstellen Sie ein Konto, um Termine zu verwalten</p>
 
-                <!-- Registrierungs-Formular - sendet später Daten per POST an Backend -->
+                <!-- Registrierungs-Formular: Sendet Daten per POST an /api/auth/register -->
                 <form class="auth-form" id="registrierung-form">
+                    <!-- E-Mail-Eingabefeld -->
                     <div class="form-group">
                         <label for="reg-email" class="form-label">
                             E-Mail-Adresse <span class="required">*</span>
@@ -54,6 +61,7 @@
                         >
                     </div>
 
+                    <!-- Passwort-Eingabefeld mit Hinweis -->
                     <div class="form-group">
                         <label for="reg-password" class="form-label">
                             Passwort <span class="required">*</span>
@@ -70,6 +78,7 @@
                         <small class="form-hint">Mindestens 8 Zeichen</small>
                     </div>
 
+                    <!-- Passwort-Bestätigungsfeld mit Hinweis -->
                     <div class="form-group">
                         <label for="reg-password-confirm" class="form-label">
                             Passwort bestätigen <span class="required">*</span>
@@ -83,18 +92,22 @@
                             placeholder="Passwort wiederholen"
                             autocomplete="new-password"
                         >
+                        <small class="form-hint">Bitte geben Sie das Passwort erneut ein, um es zu bestätigen</small>
                     </div>
 
-                    <p id="response">Response here</p>
+                    <!-- Response-Bereich: Fehlermeldungen werden hier per JavaScript angezeigt -->
+                    <div id="response" class="response-message" style="display: none;"></div>
 
+                    <!-- Formular-Aktionen: Submit-Button -->
                     <div class="form-actions">
-                        <!-- Registrierungs-Button – erstellt neues Anbieter:innen-Konto im Backend -->
+                        <!-- Registrierungs-Button: Erstellt neues Anbieter:innen-Konto im Backend -->
                         <button type="submit" class="btn btn-primary" id="registrierung-submit">
                             Registrieren
                         </button>
                     </div>
                 </form>
 
+                <!-- Footer: Link zur Login-Seite -->
                 <div class="auth-footer">
                     <p>Bereits registriert? <a href="login.html" class="auth-link">Jetzt anmelden</a></p>
                 </div>

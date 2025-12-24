@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termin-Details - Terminverwaltung</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="/javascript/script.js" async></script>
-    <script src="/javascript/termin-detail-template.js" async></script>
-    <script src="/javascript/termin-detail-fill.js" async></script>
+    <script src="/javascript/script.js" defer></script>
+    <script src="/javascript/termin-detail-template.js" defer></script>
+    <script src="/javascript/termin-detail-fill.js" defer></script>
 </head>
 <body>
     <!-- 
@@ -26,44 +26,54 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="index.html" class="nav-link">Startseite</a></li>
-                    <li><a href="login.html" class="nav-link">Anbieter:innen-Login</a></li>
+                    <li id="button-login"><a href="login.html" class="nav-link">Login | Registrieren</a></li>
+                    <li id="button-dashboard" style="display: none;"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li id="button-create" style="display: none;"><a href="termin-erstellen.html" class="nav-link">Termin erstellen</a></li>
+                    <li id="button-logout" style="display: none;"><a href="#" class="nav-link">Abmelden</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
+    <!-- ===== Main Content ===== -->
     <main class="main">
-        <!-- Zurück-Button -->
+        <!-- Zurück-Link: Navigation zurück zur Startseite -->
         <div class="back-link-container">
-            <!-- Link zurück zur Startseite - lädt die Übersicht aller Termine -->
             <a href="index.html" class="back-link">← Zurück zur Übersicht</a>
         </div>
 
-        <!-- Termin-Details werden hier dynamisch geladen -->
+        <!-- Termin-Detail-Section: Wird per JavaScript mit Termin-Daten gefüllt -->
         <section class="termin-detail" id="termin-detail">
+            <!-- Termin-Header: Titel und Status-Badge -->
             <div class="termin-detail-header">
                 <h2 class="termin-detail-title" id="termin-title">Lade Termin-Details...</h2>
                 <span class="termin-badge" id="termin-status">Verfügbar</span>
             </div>
 
+            <!-- Termin-Content: Alle Termin-Informationen -->
             <div class="termin-detail-content">
                 <div class="termin-detail-info">
+                    <!-- Beschreibung -->
                     <div class="detail-item">
                         <span class="detail-label">Beschreibung:</span>
                         <p class="detail-value" id="termin-description">-</p>
                     </div>
+                    <!-- Datum -->
                     <div class="detail-item">
                         <span class="detail-label">Datum:</span>
                         <span class="detail-value" id="termin-datum">-</span>
                     </div>
+                    <!-- Uhrzeit -->
                     <div class="detail-item">
                         <span class="detail-label">Uhrzeit:</span>
                         <span class="detail-value" id="termin-uhrzeit">-</span>
                     </div>
+                    <!-- Ort -->
                     <div class="detail-item">
                         <span class="detail-label">Ort:</span>
                         <span class="detail-value" id="termin-ort">-</span>
                     </div>
+                    <!-- Anmeldefrist -->
                     <div class="detail-item">
                         <span class="detail-label">Anmeldefrist:</span>
                         <span class="detail-value" id="termin-anmeldefrist">-</span>
@@ -72,11 +82,11 @@
             </div>
         </section>
 
-        <!-- Anmeldeformular (wird nur angezeigt, wenn Termin verfügbar und Anmeldefrist nicht abgelaufen) -->
+        <!-- Anmeldeformular-Section: Wird per JavaScript ein-/ausgeblendet basierend auf Verfügbarkeit -->
         <section class="anmeldung-section" id="anmeldung-section">
             <h3 class="anmeldung-title">Anmeldung für diesen Termin</h3>
             
-            <!-- Formular für Anmeldung - sendet später Daten per POST an Backend -->
+            <!-- Anmeldeformular: Sendet Daten per POST an Backend -->
             <form class="anmeldung-form" id="anmeldung-form">
                 <div class="form-group">
                     <label for="vorname" class="form-label">

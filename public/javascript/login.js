@@ -24,6 +24,10 @@ async function logIn()
     const password = document.getElementById('login-password').value;
     const response = document.getElementById('response');
 
+    // Verstecke vorherige Fehlermeldungen
+    response.style.display = 'none';
+    response.classList.remove('error', 'success');
+
     try {
         const result = await fetch("/api/auth/login", {
             method: 'POST',
@@ -33,15 +37,19 @@ async function logIn()
             body: JSON.stringify({ email: email, password: password }),
         })
         if (!result.ok) {
-            console.log(result);
-            response.textContent = (await result.json()).message;
+            const errorData = await result.json();
+            response.textContent = errorData.message || "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.";
+            response.classList.add('error');
+            response.style.display = 'block';
         }
         else {
-            // Return to homepage in successful login
+            // Erfolgreicher Login - Weiterleitung zur Startseite
             window.location.href = "/";
         }
     }catch(err) {
-        response.textContent = err.message;
+        response.textContent = err.message || "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.";
+        response.classList.add('error');
+        response.style.display = 'block';
     }
 
 }

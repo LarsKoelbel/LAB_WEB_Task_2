@@ -40,21 +40,29 @@ async function updatePage(attending) {
     const tbody = document.getElementById("anmeldeliste-tbody");
     const emptyState = document.getElementById("empty-state");
     const table = document.getElementById("anmeldeliste-table");
+    const countNumber = document.getElementById("count-number");
 
     tbody.innerHTML = "";
 
     if (!Array.isArray(attending) || attending.length === 0) {
         table.style.display = "none";
         emptyState.style.display = "block";
+        if (countNumber) countNumber.textContent = "0";
         return;
     }
 
     table.style.display = "table";
     emptyState.style.display = "none";
+    if (countNumber) countNumber.textContent = attending.length.toString();
 
     // Fill table
-    attending.forEach(person => {
+    attending.forEach((person, index) => {
         const tr = document.createElement("tr");
+
+        // Nummer
+        const tdNumber = document.createElement("td");
+        tdNumber.className = "td-number";
+        tdNumber.textContent = (index + 1).toString();
 
         const tdFirstName = document.createElement("td");
         tdFirstName.textContent = person.first_name;
@@ -63,8 +71,13 @@ async function updatePage(attending) {
         tdLastName.textContent = person.last_name;
 
         const tdEmail = document.createElement("td");
-        tdEmail.textContent = person.email;
+        const emailLink = document.createElement("a");
+        emailLink.href = `mailto:${person.email}`;
+        emailLink.textContent = person.email;
+        emailLink.className = "email-link";
+        tdEmail.appendChild(emailLink);
 
+        tr.appendChild(tdNumber);
         tr.appendChild(tdFirstName);
         tr.appendChild(tdLastName);
         tr.appendChild(tdEmail);

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anmeldeliste - Terminverwaltung</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="/javascript/script.js" async></script>
-    <script src="/javascript/anmeldeliste.js" async></script>
+    <script src="/javascript/script.js" defer></script>
+    <script src="/javascript/anmeldeliste.js" defer></script>
 </head>
 <body>
     <!-- 
@@ -25,46 +25,65 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="index.html" class="nav-link">Startseite</a></li>
-                    <li><a href="termin-erstellen.html" class="nav-link">Termin erstellen</a></li>
+                    <li id="button-login" style="display: none;"><a href="login.html" class="nav-link">Login | Registrieren</a></li>
+                    <li id="button-dashboard"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li id="button-create"><a href="termin-erstellen.html" class="nav-link">Termin erstellen</a></li>
+                    <li id="button-logout"><a href="#" class="nav-link">Abmelden</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
+    <!-- ===== Main Content ===== -->
     <main class="main">
+        <!-- Zurück-Link: Navigation zurück zum Dashboard -->
         <div class="back-link-container">
-            <!-- Link zurück zum Dashboard -->
-            <a href="/" class="back-link">← Zurück zum Dashboard</a>
+            <a href="dashboard.html" class="back-link">← Zurück zum Dashboard</a>
         </div>
 
+        <!-- Anmeldeliste-Section: Zeigt alle Anmeldungen zu einem Termin -->
         <section class="anmeldeliste-section">
+            <!-- Header: Titel, Anmeldungszähler und Termin-Info -->
             <div class="anmeldeliste-header">
-                <h2 class="anmeldeliste-title" id="termin-titel">Anmeldeliste</h2>
+                <div class="anmeldeliste-title-wrapper">
+                    <h2 class="anmeldeliste-title" id="termin-titel">Anmeldeliste</h2>
+                    <!-- Anmeldungszähler: Wird per JavaScript aktualisiert -->
+                    <div class="anmeldeliste-count" id="anmeldeliste-count">
+                        <span class="count-number" id="count-number">0</span>
+                        <span class="count-label">Anmeldung(en)</span>
+                    </div>
+                </div>
+                <!-- Termin-Info: Wird per JavaScript mit Termin-Details gefüllt -->
                 <div class="anmeldeliste-info" id="termin-info">
                     <!-- Termin-Info wird hier dynamisch geladen -->
                 </div>
             </div>
 
-            <!-- Tabelle mit Anmeldungen wird hier dynamisch geladen -->
+            <!-- Tabelle: Wird per JavaScript mit Anmeldungen gefüllt -->
             <div class="anmeldeliste-table-container">
                 <table class="anmeldeliste-table" id="anmeldeliste-table">
+                    <!-- Tabellen-Header: Spaltenüberschriften -->
                     <thead>
                         <tr>
+                            <th class="th-number">#</th>
                             <th>Vorname</th>
                             <th>Nachname</th>
                             <th>E-Mail-Adresse</th>
                         </tr>
                     </thead>
+                    <!-- Tabellen-Body: Wird per JavaScript mit Anmeldungen gefüllt -->
                     <tbody id="anmeldeliste-tbody">
-                        <!-- Anmeldungen werden hier eingefügt -->
+                        <!-- Anmeldungen werden hier per JavaScript eingefügt -->
                     </tbody>
                 </table>
             </div>
 
-            <!-- Meldung, wenn keine Anmeldungen vorhanden sind -->
+            <!-- Empty State: Wird angezeigt, wenn keine Anmeldungen vorhanden sind -->
             <div class="empty-state" id="empty-state" style="display: none;">
                 <div class="empty-state-content">
+                    <div class="empty-state-icon">📋</div>
                     <p class="empty-state-text">Für diesen Termin liegen noch keine Anmeldungen vor.</p>
+                    <p class="empty-state-hint">Sobald sich Interessent:innen anmelden, erscheinen sie hier in der Liste.</p>
                 </div>
             </div>
         </section>

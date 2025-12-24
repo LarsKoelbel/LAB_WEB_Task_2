@@ -5,12 +5,21 @@
 */
 
 /* ===== CSS Reset & Basis-Styles ===== */
+/* 
+    Universal-Reset: Entfernt Standard-Margins und Paddings von allen Elementen
+    box-sizing: border-box sorgt dafür, dass Padding und Border in der Breite/Höhe enthalten sind
+*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* 
+    CSS Custom Properties (Variablen)
+    Zentrale Definition aller Design-Tokens für konsistentes Styling
+    Werden überall in der Datei verwendet, um Änderungen zentral vornehmen zu können
+*/
 :root {
     /* Primärfarben */
     --color-orange: #FF6B35;
@@ -50,6 +59,10 @@
     --transition-normal: 0.3s ease;
 }
 
+/* 
+    Body-Styling: Basis-Konfiguration für die gesamte Seite
+    Flexbox-Layout ermöglicht Sticky-Footer (Footer bleibt am unteren Rand)
+*/
 body {
     font-family: var(--font-family);
     font-size: var(--font-size-base);
@@ -62,12 +75,20 @@ body {
 }
 
 /* ===== Header & Navigation ===== */
+/* 
+    Header: Fixierter Header-Bereich mit Navigation
+    Box-Shadow für subtilen Tiefeneffekt
+*/
 .header {
     background-color: var(--color-white);
     border-bottom: 1px solid var(--color-gray);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+/* 
+    Navigation-Container: Zentriert den Inhalt mit max-width
+    Flexbox für horizontale Anordnung von Logo und Navigation
+*/
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -128,6 +149,11 @@ body {
 }
 
 /* ===== Main Content ===== */
+/* 
+    Main-Bereich: Hauptinhalt der Seite
+    flex: 1 sorgt dafür, dass der Main-Bereich den verfügbaren Platz ausfüllt (für Sticky-Footer)
+    max-width begrenzt die Breite für bessere Lesbarkeit auf großen Bildschirmen
+*/
 .main {
     flex: 1;
     max-width: 1200px;
@@ -137,6 +163,10 @@ body {
 }
 
 /* ===== Hero Section ===== */
+/* 
+    Hero-Section: Einleitungsbereich auf der Startseite
+    Zentrierte Ausrichtung für Titel und Untertitel
+*/
 .hero {
     text-align: center;
     margin-bottom: var(--spacing-xl);
@@ -155,6 +185,11 @@ body {
 }
 
 /* ===== Termin-Liste ===== */
+/* 
+    Termin-Liste: Grid-Layout für Termin-Karten
+    auto-fill erstellt automatisch Spalten basierend auf verfügbarem Platz
+    minmax(320px, 1fr) sorgt für mindestens 320px breite Karten
+*/
 .termin-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -163,6 +198,11 @@ body {
 }
 
 /* ===== Termin-Karten ===== */
+/* 
+    Termin-Karte: Einzelne Karte für einen Termin
+    Flexbox-Layout (column) für vertikale Anordnung der Inhalte
+    Transition für sanfte Hover-Effekte
+*/
 .termin-card {
     background-color: var(--color-white);
     border: 1px solid var(--color-gray);
@@ -174,6 +214,7 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+/* Hover-Effekt: Karte hebt sich leicht an mit stärkerem Schatten */
 .termin-card:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
@@ -247,6 +288,10 @@ body {
 }
 
 /* ===== Buttons ===== */
+/* 
+    Basis-Button-Styling: Gemeinsame Eigenschaften für alle Buttons
+    transition für sanfte Hover- und Focus-Effekte
+*/
 .btn {
     display: inline-block;
     padding: var(--spacing-sm) var(--spacing-lg);
@@ -261,6 +306,7 @@ body {
     font-family: var(--font-family);
 }
 
+/* Primary-Button: Orange als Hauptfarbe (Call-to-Action) */
 .btn-primary {
     background-color: var(--color-orange);
     color: var(--color-white);
@@ -298,6 +344,11 @@ body {
 }
 
 /* ===== Footer ===== */
+/* 
+    Footer: Fußzeile der Seite
+    margin-top: auto sorgt für Sticky-Footer (bleibt am unteren Rand)
+    Funktioniert in Kombination mit body { display: flex; flex-direction: column; }
+*/
 .footer {
     background-color: var(--color-light-gray);
     padding: var(--spacing-lg);
@@ -307,6 +358,11 @@ body {
 }
 
 /* ===== Responsive Design (Mobile-First) ===== */
+/* 
+    Media Query für Tablets und kleinere Bildschirme (max-width: 768px)
+    Mobile-First Ansatz: Basis-Styles sind für mobile Geräte optimiert
+    Größere Bildschirme erhalten zusätzliche Styles
+*/
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
@@ -407,12 +463,28 @@ body {
         padding: var(--spacing-lg);
     }
 
+    .anmeldeliste-title-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
     .anmeldeliste-title {
         font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .anmeldeliste-count {
+        width: 100%;
+        justify-content: center;
     }
 
     .anmeldeliste-info {
         flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .anmeldeliste-table-container {
+        border-radius: var(--radius-sm);
     }
 
     .anmeldeliste-table {
@@ -421,11 +493,21 @@ body {
 
     .anmeldeliste-table th,
     .anmeldeliste-table td {
+        padding: var(--spacing-sm) var(--spacing-xs);
+    }
+
+    .anmeldeliste-table th.th-number,
+    .anmeldeliste-table td.td-number {
+        width: 40px;
         padding: var(--spacing-sm);
     }
 }
 
 /* ===== Formular-Fehler & Nachrichten ===== */
+/* 
+    Field-Error: Fehlermeldung für einzelne Formularfelder
+    Wird per JavaScript angezeigt, wenn Validierung fehlschlägt
+*/
 .field-error {
     display: block;
     color: #DC2626;
@@ -466,6 +548,10 @@ textarea.error:focus {
 }
 
 /* ===== Termin-Detailseite ===== */
+/* 
+    Back-Link: Navigation zurück zur vorherigen Seite
+    Wird auf Detailseiten verwendet
+*/
 .back-link-container {
     margin-bottom: var(--spacing-lg);
 }
@@ -548,6 +634,10 @@ textarea.error:focus {
 }
 
 /* ===== Anmeldeformular ===== */
+/* 
+    Anmeldung-Section: Container für das Anmeldeformular auf der Termin-Detailseite
+    Wird per JavaScript ein-/ausgeblendet basierend auf Termin-Verfügbarkeit
+*/
 .anmeldung-section {
     background-color: var(--color-white);
     border: 1px solid var(--color-gray);
@@ -640,6 +730,10 @@ textarea.error:focus {
 }
 
 /* ===== Authentifizierungs-Seiten (Login/Registrierung) ===== */
+/* 
+    Auth-Section: Container für Login- und Registrierungs-Formulare
+    Zentriert das Formular vertikal und horizontal auf der Seite
+*/
 .auth-section {
     display: flex;
     justify-content: center;
@@ -702,7 +796,34 @@ textarea.error:focus {
     outline-offset: 2px;
 }
 
+/* ===== Response/Fehlermeldungen in Formularen ===== */
+.response-message {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    font-weight: 500;
+    text-align: center;
+}
+
+.response-message.error {
+    background-color: #FEE2E2;
+    color: #991B1B;
+    border: 1px solid #DC2626;
+    display: block;
+}
+
+.response-message.success {
+    background-color: #D1FAE5;
+    color: #065F46;
+    border: 1px solid #10B981;
+    display: block;
+}
+
 /* ===== Dashboard ===== */
+/* 
+    Dashboard-Header: Überschrift und Button zum Erstellen eines neuen Termins
+    Flexbox-Layout für horizontale Anordnung
+*/
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -730,6 +851,10 @@ textarea.error:focus {
 }
 
 /* ===== Termin-Erstellen ===== */
+/* 
+    Termin-Erstellen-Section: Container für das Formular zum Erstellen eines neuen Termins
+    Enthält alle Eingabefelder für Termin-Details
+*/
 .termin-erstellen-section {
     background-color: var(--color-white);
     border: 1px solid var(--color-gray);
@@ -789,6 +914,10 @@ textarea.error:focus {
 }
 
 /* ===== Anmeldeliste ===== */
+/* 
+    Anmeldeliste-Section: Container für die Anmeldeliste eines Termins
+    Enthält Header mit Titel/Zähler, Termin-Info und Tabelle mit Anmeldungen
+*/
 .anmeldeliste-section {
     background-color: var(--color-white);
     border: 1px solid var(--color-gray);
@@ -804,56 +933,150 @@ textarea.error:focus {
     border-bottom: 3px solid var(--color-lila);
 }
 
+.anmeldeliste-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
 .anmeldeliste-title {
     font-size: var(--font-size-2xl);
     font-weight: 700;
     color: var(--color-lila);
-    margin-bottom: var(--spacing-md);
+    margin: 0;
+}
+
+.anmeldeliste-count {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: rgba(107, 70, 193, 0.1);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-lila);
+}
+
+.count-number {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-lila);
+}
+
+.count-label {
+    font-size: var(--font-size-base);
+    color: var(--color-dark-gray);
+    font-weight: 500;
 }
 
 .anmeldeliste-info {
     display: flex;
     gap: var(--spacing-lg);
     flex-wrap: wrap;
+    margin-top: var(--spacing-md);
+}
+
+.anmeldeliste-info-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-base);
+}
+
+.anmeldeliste-info-label {
+    font-weight: 600;
+    color: var(--color-text);
 }
 
 .anmeldeliste-table-container {
     overflow-x: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-gray);
+    margin-top: var(--spacing-lg);
 }
 
 .anmeldeliste-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: var(--spacing-lg);
+    margin: 0;
 }
 
 .anmeldeliste-table thead {
-    background-color: rgba(107, 70, 193, 0.1);
+    background: linear-gradient(135deg, rgba(107, 70, 193, 0.15) 0%, rgba(107, 70, 193, 0.05) 100%);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .anmeldeliste-table th {
-    padding: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
     text-align: left;
     font-weight: 600;
     color: var(--color-lila);
     border-bottom: 2px solid var(--color-lila);
+    font-size: var(--font-size-base);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.875rem;
+}
+
+.anmeldeliste-table th.th-number {
+    width: 60px;
+    text-align: center;
 }
 
 .anmeldeliste-table td {
-    padding: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
     border-bottom: 1px solid var(--color-gray);
     color: var(--color-dark-gray);
+    transition: background-color var(--transition-fast);
+}
+
+.anmeldeliste-table td.td-number {
+    text-align: center;
+    font-weight: 600;
+    color: var(--color-lila);
+    background-color: rgba(107, 70, 193, 0.05);
+}
+
+.anmeldeliste-table tbody tr {
+    transition: all var(--transition-fast);
 }
 
 .anmeldeliste-table tbody tr:hover {
-    background-color: rgba(107, 70, 193, 0.05);
+    background-color: rgba(107, 70, 193, 0.08);
+    transform: scale(1.01);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .anmeldeliste-table tbody tr:last-child td {
     border-bottom: none;
 }
 
+.email-link {
+    color: var(--color-lila);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    padding: var(--spacing-xs) 0;
+    display: inline-block;
+}
+
+.email-link:hover,
+.email-link:focus {
+    color: var(--color-lila-hover);
+    text-decoration: underline;
+    outline: 2px solid var(--color-lila);
+    outline-offset: 2px;
+}
+
 /* ===== Empty State ===== */
+/* 
+    Empty State: Wird angezeigt, wenn keine Daten vorhanden sind
+    Verwendet auf Dashboard (keine Termine) und Anmeldeliste (keine Anmeldungen)
+*/
 .empty-state {
     text-align: center;
     padding: var(--spacing-xl);
@@ -864,11 +1087,89 @@ textarea.error:focus {
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-lg);
+    padding: var(--spacing-xl);
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    opacity: 0.5;
+    margin-bottom: var(--spacing-sm);
 }
 
 .empty-state-text {
     color: var(--color-dark-gray);
     font-size: var(--font-size-lg);
+    font-weight: 500;
+    margin: 0;
+}
+
+.empty-state-hint {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-base);
+    opacity: 0.7;
+    margin: 0;
+    max-width: 500px;
+}
+
+/* ===== Error Section (404 Not Found) ===== */
+/* 
+    Error-Section: Container für die 404-Fehlerseite
+    Zentriert den Fehler-Container vertikal und horizontal
+*/
+.error-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: var(--spacing-xl) 0;
+}
+
+.error-container {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.error-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-lila);
+    margin-bottom: var(--spacing-md);
+}
+
+.error-message {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.6;
+}
+
+.error-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.error-container .btn {
+    display: inline-block;
+    width: auto;
+    min-width: 150px;
+}
+
+@media (max-width: 768px) {
+    .error-actions {
+        flex-direction: column;
+    }
+    
+    .error-container .btn {
+        width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -881,10 +1182,88 @@ textarea.error:focus {
     }
 }
 
+/* 
+    Controls: Versteckte Steuerelemente für Termin-Karten
+    Werden per JavaScript angezeigt, wenn der Benutzer Besitzer des Termins ist
+*/
 .controls{
     display: none;
 }
 
+/* 
+    Update-Button: Wird dynamisch angezeigt, wenn Sichtbarkeit geändert wird
+    Per JavaScript gesteuert
+*/
 .update-button {
     display: none;
+}
+
+/* ===== Suchformular für Termin-ID ===== */
+/* 
+    Search-Container: Container für das Suchformular auf der Startseite
+    Ermöglicht direkten Zugriff auf Termine per ID
+*/
+.search-container {
+    max-width: 600px;
+    margin: var(--spacing-lg) auto 0;
+    padding: 0;
+}
+
+.search-form {
+    width: 100%;
+}
+
+.search-input-group {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: stretch;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 0;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-gray);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    font-family: var(--font-family);
+    color: var(--color-text);
+    background-color: var(--color-white);
+    transition: all var(--transition-fast);
+}
+
+.search-input:focus {
+    outline: 2px solid var(--color-lila);
+    outline-offset: 2px;
+    border-color: var(--color-lila);
+    box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.1);
+}
+
+.search-input::placeholder {
+    color: var(--color-dark-gray);
+    opacity: 0.6;
+}
+
+.search-button {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    min-width: 120px;
+    width: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+/* Responsive Anpassungen für Suchformular */
+@media (max-width: 768px) {
+    .search-container {
+        max-width: 100%;
+        margin: var(--spacing-md) auto 0;
+    }
+    
+    .search-input-group {
+        flex-direction: column;
+    }
+    
+    .search-button {
+        width: 100%;
+    }
 }

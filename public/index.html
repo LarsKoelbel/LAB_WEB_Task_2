@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terminverwaltung - Startseite</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="/javascript/script.js" async></script>
-    <script src="/javascript/index.js" async></script>
+    <script src="/javascript/script.js" defer></script>
+    <script src="/javascript/index.js" defer></script>
 </head>
 <body>
     <!-- 
@@ -15,43 +15,74 @@
         Funktion: Übersicht über verfügbare Termine, Navigation zu Detailseiten
     -->
     
+    <!-- ===== Header & Navigation ===== -->
+    <!-- 
+        Header: Enthält Logo und Navigation
+        Navigation wird per JavaScript basierend auf Login-Status angepasst
+    -->
     <header class="header">
         <nav class="nav">
             <div class="nav-container">
+                <!-- Logo: Link zur Startseite mit Bild und Text -->
                 <a href="index.html" class="logo">
                     <img src="images/Fuchs_Logo_Börse.png" alt="Logo" class="logo-img">
                     <span class="logo-text">Terminverwaltung</span>
                 </a>
+                <!-- Navigation: Links werden per JavaScript ein-/ausgeblendet -->
                 <ul class="nav-links">
-                    <li><a href="index.html" class="nav-link active">Startseite</a></li>
-                    <li><a href="login.html" class="nav-link">Login | Registrieren</a></li>
-                    <li id="button-create"><a href="termin-erstellen.html" class="nav-link">Termin erstellen</a></li>
-                    <li id="button-logout"><a class="nav-link">Abmelden</a></li>
+                    <li><a href="index.html" class="nav-link">Startseite</a></li>
+                    <li id="button-login"><a href="login.html" class="nav-link">Login | Registrieren</a></li>
+                    <li id="button-dashboard" style="display: none;"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li id="button-create" style="display: none;"><a href="termin-erstellen.html" class="nav-link">Termin erstellen</a></li>
+                    <li id="button-logout" style="display: none;"><a href="#" class="nav-link">Abmelden</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
+    <!-- ===== Main Content ===== -->
     <main class="main">
+        <!-- Hero-Section: Suchformular für Termin-ID -->
         <section class="hero">
             <h2 class="hero-title">Ich habe eine Einladung</h2>
             <p class="hero-subtitle">Falls sie zu einem Termin eingeladen wurden, können sie die Termin-ID hier eingeben</p>
-            <input type="text" placeholder="Termin ID" id="termin-id">
-            <a class="btn btn-primary" id="search-button">Suchen</a>
+            
+            <!-- Suchformular für Termin-ID: Ermöglicht direkten Zugriff auf Termine per ID -->
+            <div class="search-container">
+                <form class="search-form" id="search-form">
+                    <div class="search-input-group">
+                        <input 
+                            type="text" 
+                            id="termin-id" 
+                            name="termin-id"
+                            class="form-input search-input" 
+                            placeholder="Termin-ID eingeben"
+                            required
+                        >
+                        <button type="submit" class="btn btn-primary search-button" id="search-button">
+                            Suchen
+                        </button>
+                    </div>
+                </form>
+            </div>
         </section>
+        
+        <!-- Trennlinie zwischen Suchbereich und Terminliste -->
         <hr>
+        
+        <!-- Hero-Section: Überschrift für verfügbare Termine -->
         <section class="hero">
             <h2 class="hero-title">Verfügbare Termine</h2>
             <p class="hero-subtitle">Finden Sie den passenden Termin für sich</p>
         </section>
 
+        <!-- Termin-Liste: Wird per JavaScript dynamisch mit Terminen gefüllt -->
         <section class="termin-list" id="termin-list">
-            <!-- Mock-Daten: Statische Beispiel-Termine -->
-
-
+            <!-- Termine werden hier per JavaScript eingefügt -->
         </section>
     </main>
 
+    <!-- ===== Footer ===== -->
     <footer class="footer">
         <p>&copy; 2025 Terminverwaltung. Alle Rechte vorbehalten.</p>
     </footer>

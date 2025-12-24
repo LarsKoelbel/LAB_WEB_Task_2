@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Terminverwaltung</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="/javascript/script.js" defer></script>
+    <script src="/javascript/dashboard.js" defer></script>
 </head>
 <body>
     <!-- 
@@ -23,28 +25,31 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="index.html" class="nav-link">Startseite</a></li>
-                    <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
-                    <li><a href="termin-erstellen.html" class="nav-link">Termin erstellen</a></li>
-                    <li><a href="login.html" class="nav-link">Abmelden</a></li>
+                    <li id="button-login" style="display: none;"><a href="login.html" class="nav-link">Login | Registrieren</a></li>
+                    <li id="button-dashboard"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li id="button-create"><a href="termin-erstellen.html" class="nav-link">Termin erstellen</a></li>
+                    <li id="button-logout"><a href="#" class="nav-link">Abmelden</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
+    <!-- ===== Main Content ===== -->
     <main class="main">
+        <!-- Dashboard-Header: Titel und Button zum Erstellen eines neuen Termins -->
         <section class="dashboard-header">
             <h2 class="dashboard-title">Meine Termine</h2>
             <!-- Button zum Erstellen eines neuen Termins - navigiert zur Termin-Erstellen-Seite -->
             <a href="termin-erstellen.html" class="btn btn-primary">+ Neuen Termin erstellen</a>
         </section>
 
-        <!-- Termin-Übersicht wird hier dynamisch geladen -->
+        <!-- Termin-Übersicht: Wird per JavaScript dynamisch mit Terminen des angemeldeten Anbieters gefüllt -->
         <section class="termin-list" id="termin-list">
-            <!-- Mock-Daten: Statische Beispiel-Termine des Anbieters -->
-            <!-- Diese werden später per API geladen: GET /api/termine -->
+            <!-- Termine werden hier per JavaScript eingefügt -->
+            <!-- Backend-Integration: GET /api/termine (mit JWT-Token) -->
         </section>
 
-        <!-- Meldung, wenn keine Termine vorhanden sind -->
+        <!-- Empty State: Wird angezeigt, wenn keine Termine vorhanden sind -->
         <section class="empty-state" id="empty-state" style="display: none;">
             <div class="empty-state-content">
                 <p class="empty-state-text">Sie haben noch keine Termine erstellt.</p>
@@ -58,8 +63,6 @@
         <p>&copy; 2025 Terminverwaltung. Alle Rechte vorbehalten.</p>
     </footer>
 
-    <script src="script.js"></script>
-    <script src="dashboard.js"></script>
 </body>
 </html>
 

@@ -1,10 +1,6 @@
 async function init()
 {
-    if (!await getUserIsAuthenticated()) {
-        document.getElementById("button-logout").style.display = "none"
-        document.getElementById("button-create").style.display = "none"
-    }
-    else document.getElementById("button-logout").addEventListener("click", logout)
+    // Navigation wird bereits von script.js initialisiert
 
 
     // Get the private appointments as well in case the user is logged in
@@ -13,7 +9,14 @@ async function init()
         renderAppointment(a);
     })
 
-    document.getElementById("search-button").addEventListener("click", searchAppointment)
+    // Suchformular Event-Listener
+    const searchForm = document.getElementById("search-form");
+    if (searchForm) {
+        searchForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            searchAppointment();
+        });
+    }
 }
 
 async function getAppointments()
@@ -109,39 +112,6 @@ function appointmentSoledOut(appointment)
     return appointment.attending.length >= appointment.max_attending;
 }
 
-async function getUserIsAuthenticated()
-{
-    try {
-        const resp = await fetch("/api/private/ping");
-        return resp.ok;
-    } catch (error) {
-        throw error;
-    }
-}
-
-async function getUsername()
-{
-    try {
-        const resp = await fetch("/api/private/username");
-        if (resp.ok) return (await resp.json()).username;
-        else return null;
-    } catch (error) {
-        return null;
-    }
-}
-
-/**
- * Logg the user out of the system
- */
-async function logout()
-{
-    await fetch("/api/auth/logout", {
-        method: "POST",
-        credentials: "include"
-    });
-
-    // Reload main page
-    window.location.reload();
-}
+// getUserIsAuthenticated, getUsername und logout sind in script.js definiert
 
 window.addEventListener('load', init);

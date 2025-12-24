@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anbieter:innen-Login - Terminverwaltung</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="/javascript/script.js" async></script>
-    <script src="/javascript/login.js" async></script>
+    <script src="/javascript/script.js" defer></script>
+    <script src="/javascript/login.js" defer></script>
 </head>
 <body>
     <!-- 
@@ -25,20 +25,27 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="index.html" class="nav-link">Startseite</a></li>
-                    <li><a href="login.html" class="nav-link">Login | Registrieren</a></li>
+                    <li id="button-login"><a href="login.html" class="nav-link">Login | Registrieren</a></li>
+                    <li id="button-dashboard" style="display: none;"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li id="button-create" style="display: none;"><a href="termin-erstellen.html" class="nav-link">Termin erstellen</a></li>
+                    <li id="button-logout" style="display: none;"><a href="#" class="nav-link">Abmelden</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
+    <!-- ===== Main Content ===== -->
     <main class="main">
+        <!-- Authentifizierungs-Section: Zentriert das Login-Formular -->
         <section class="auth-section">
             <div class="auth-container">
+                <!-- Titel und Untertitel -->
                 <h2 class="auth-title">Login</h2>
                 <p class="auth-subtitle">Melden Sie sich an, um Ihre Termine zu verwalten</p>
 
-                <!-- Login-Formular - sendet später E-Mail und Passwort per POST an Backend -->
+                <!-- Login-Formular: Sendet E-Mail und Passwort per POST an /api/auth/login -->
                 <form class="auth-form" id="login-form">
+                    <!-- E-Mail-Eingabefeld -->
                     <div class="form-group">
                         <label for="login-email" class="form-label">
                             E-Mail-Adresse <span class="required">*</span>
@@ -54,6 +61,7 @@
                         >
                     </div>
 
+                    <!-- Passwort-Eingabefeld -->
                     <div class="form-group">
                         <label for="login-password" class="form-label">
                             Passwort <span class="required">*</span>
@@ -69,16 +77,19 @@
                         >
                     </div>
 
-                    <p id="response">Response here</p>
+                    <!-- Response-Bereich: Fehlermeldungen werden hier per JavaScript angezeigt -->
+                    <div id="response" class="response-message" style="display: none;"></div>
 
+                    <!-- Formular-Aktionen: Submit-Button -->
                     <div class="form-actions">
-                        <!-- Login-Button – authentifiziert Anbieter:innen über das Backend -->
+                        <!-- Login-Button: Authentifiziert Anbieter:innen über das Backend -->
                         <button class="btn btn-primary" id="login-submit">
                             Anmelden
                         </button>
                     </div>
                 </form>
 
+                <!-- Footer: Link zur Registrierungsseite -->
                 <div class="auth-footer">
                     <p>Noch kein Konto? <a href="registrierung.html" class="auth-link">Jetzt registrieren</a></p>
                 </div>

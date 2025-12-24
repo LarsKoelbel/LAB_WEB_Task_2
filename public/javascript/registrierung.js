@@ -25,7 +25,17 @@ async function register()
     const password_confirm = document.getElementById('reg-password-confirm').value;
     const response = document.getElementById('response');
 
-    if (password !== password_confirm) {response.textContent = "Passwords do not match"; return;}
+    // Verstecke vorherige Fehlermeldungen
+    response.style.display = 'none';
+    response.classList.remove('error', 'success');
+
+    // Prüfe Passwort-Übereinstimmung
+    if (password !== password_confirm) {
+        response.textContent = "Die Passwörter stimmen nicht überein. Bitte wiederholen Sie das Passwort korrekt.";
+        response.classList.add('error');
+        response.style.display = 'block';
+        return;
+    }
 
     try {
         const result = await fetch("/api/auth/register", {
@@ -36,15 +46,19 @@ async function register()
             body: JSON.stringify({ email: email, password: password }),
         })
         if (!result.ok) {
-            console.log(result);
-            response.textContent = (await result.json()).message;
+            const errorData = await result.json();
+            response.textContent = errorData.message || "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.";
+            response.classList.add('error');
+            response.style.display = 'block';
         }
         else {
-            // Return to login page in successful login
+            // Erfolgreiche Registrierung - Weiterleitung zum Login
             window.location.href = "/login.html";
         }
     }catch(err) {
-        response.textContent = err.message;
+        response.textContent = err.message || "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.";
+        response.classList.add('error');
+        response.style.display = 'block';
     }
 
 }
